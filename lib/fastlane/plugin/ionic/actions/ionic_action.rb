@@ -100,6 +100,7 @@ module Fastlane
         args << '--device' if params[:device]
         args << '--prod' if params[:prod]
         args << '--browserify' if params[:browserify]
+        args << '--source-map' if params[:source_map]
 
         if !params[:cordova_build_config_file].to_s.empty?
           args << "--buildConfig=#{Shellwords.escape(params[:cordova_build_config_file])}"
@@ -267,6 +268,13 @@ module Fastlane
             key: :browserify,
             env_name: "CORDOVA_BROWSERIFY",
             description: "Specifies whether to browserify build or not",
+            default_value: false,
+            is_string: false
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :source_map,
+            env_name: "CORDOVA_SOURCE_MAP",
+            description: "Specifies whether to create source maps or not",
             default_value: false,
             is_string: false
           ),
